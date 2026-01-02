@@ -50,6 +50,8 @@ services:
       - frontend-net
     ports:
       - 3000:3000
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS: dash.skyelowry.com
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.rule=Host(`dash.skyelowry.com`)"
