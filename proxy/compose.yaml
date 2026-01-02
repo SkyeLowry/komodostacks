@@ -1,7 +1,7 @@
 services:
   # --- Traefik: The Traffic Cop ---
   traefik:
-    image: traefik:v3.4
+    image: traefik:latest
     container_name: traefik
     restart: unless-stopped
     security_opt:
