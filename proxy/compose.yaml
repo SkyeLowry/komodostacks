@@ -16,6 +16,11 @@ services:
       - "--entrypoints.websecure.forwardedheaders.trustedips=172.16.0.0/12"
       # Set the default network for Traefik to look for containers
       - "--providers.docker.network=frontend-net"
+    labels:
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=test:$$spr1$$HfuskkkW$$IgXLP6ewTrSuBkTrqE8wj"
     ports:
       - 192.168.2.5:80:80
       - 192.168.2.5:443:443
