@@ -1,0 +1,23 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+    volumes:
+      - /dockervol/open-webui-data:/app/backend/data
+    networks:
+      - app-monitoring-net
+      
+  hass-mcp:
+    image: voska/hass-mcp:latest
+    container_name: hass-mcp
+    environment:
+      - HA_URL=${HA_URL}
+      - HA_TOKEN=${HASS_TOKEN} # Use a Long-Lived Access Token from your HA Profile
+    restart: unless-stopped
+    networks:
+      - app-monitoring-net
