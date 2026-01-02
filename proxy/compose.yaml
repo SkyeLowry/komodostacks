@@ -48,6 +48,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # For service status widgets
     networks:
       - frontend-net
+    ports:
+      - 3000:3000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.rule=Host(`dash.skyelowry.com`)"
