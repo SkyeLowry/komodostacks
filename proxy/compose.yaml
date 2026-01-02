@@ -18,7 +18,7 @@ services:
       - "--providers.docker.network=frontend-net"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/Container/apps/traefik/acme.json:/acme.json # For SSL cert storage
+      - ${STORAGE_LOCATION}/traefik/acme.json:/acme.json # For SSL cert storage
     networks:
       - frontend-net
 
@@ -41,7 +41,7 @@ services:
     container_name: homepage
     restart: unless-stopped
     volumes:
-      - /mnt/tank/apps/homepage/config:/app/config
+      - ${STORAGE_LOCATION}/homepage-config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro # For service status widgets
     networks:
       - frontend-net
