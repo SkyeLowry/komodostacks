@@ -23,3 +23,4 @@ services:
 
 networks:
   app-ai-net:
+    name: "app-ai-net"
