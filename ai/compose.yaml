@@ -11,7 +11,6 @@ services:
       - /dockervol/open-webui-data:/app/backend/data
     networks:
       - app-ai-net
-      - frontend-net
       
   hass-mcp:
     image: voska/hass-mcp:latest
@@ -22,3 +21,6 @@ services:
     restart: unless-stopped
     networks:
       - app-ai-net
+
+networks:
+  app-ai-net:
