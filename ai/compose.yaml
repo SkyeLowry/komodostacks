@@ -3,7 +3,6 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     restart: unless-stopped
-    ports:
     environment:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
