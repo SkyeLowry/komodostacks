@@ -1,0 +1,57 @@
+services:
+  # --- Traefik: The Traffic Cop ---
+  traefik:
+    image: traefik:v3.4
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # Trust Cloudflare IPs (Internal Docker Range)
+      - "--entrypoints.websecure.forwardedheaders.trustedips=172.16.0.0/12"
+      # Set the default network for Traefik to look for containers
+      - "--providers.docker.network=frontend-net"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/Container/apps/traefik/acme.json:/acme.json # For SSL cert storage
+    networks:
+      - frontend-net
+
+  # --- Cloudflared: The Secure Tunnel ---
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN} # Add this to Komodo environment variables
+    command: tunnel --no-autoupdate run
+    networks:
+      - frontend-net
+    depends_on:
+      - traefik
+
+  # --- Homepage: The Dashboard ---
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    volumes:
+      - /mnt/tank/apps/homepage/config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro # For service status widgets
+    networks:
+      - frontend-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`dash.skyelowry.com`)"
+      - "traefik.http.routers.homepage.entrypoints=websecure"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+
+# --- Shared Network ---
+networks:
+  frontend-net:
+    name: frontend-net # This is the "Owner" of the network
