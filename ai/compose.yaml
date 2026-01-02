@@ -10,7 +10,8 @@ services:
     volumes:
       - /dockervol/open-webui-data:/app/backend/data
     networks:
-      - app-monitoring-net
+      - app-ai-net
+      - frontend-net
       
   hass-mcp:
     image: voska/hass-mcp:latest
@@ -20,4 +21,4 @@ services:
       - HA_TOKEN=${HASS_TOKEN} # Use a Long-Lived Access Token from your HA Profile
     restart: unless-stopped
     networks:
-      - app-monitoring-net
+      - app-ai-net
