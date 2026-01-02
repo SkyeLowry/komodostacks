@@ -7,7 +7,7 @@ services:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
     volumes:
-      - /dockervol/open-webui-data:/app/backend/data
+      - /mnt/Containers/stack-ai/open-webui-data:/app/backend/data
     networks:
       - app-ai-net
       
