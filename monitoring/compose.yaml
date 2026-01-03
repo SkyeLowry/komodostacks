@@ -98,3 +98,5 @@ services:
 networks:
   app-monitoring-net:
     name: app-monitoring-net
+  frontend-net:
+    external: true
