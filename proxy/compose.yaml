@@ -13,8 +13,8 @@ services:
     labels:
       - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=test:$$spr1$$HfuskkkW$$IgXLP6ewTrSuBkTrqE8wj"
+      #- "traefik.http.routers.dashboard.middlewares=auth"
+      #- "traefik.http.middlewares.auth.basicauth.users=test:test"
     ports:
       - 192.168.2.5:80:80
       - 192.168.2.5:443:443
