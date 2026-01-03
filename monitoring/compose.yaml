@@ -31,7 +31,7 @@ services:
       - "traefik.http.routers.splunk.entrypoints=websecure" # Use 443
       - "traefik.http.routers.splunk.tls=true"
       - "traefik.http.routers.splunk.tls.certresolver=cloudflare" 
-      - "traefik.http.services.splunk.loadbalancer.server.port=8080"
+      - "traefik.http.services.splunk.loadbalancer.server.port=8000"
       # --- Homepage Discovery ---
       - "homepage.group=Monitoring"
       - "homepage.name=Splunk"
