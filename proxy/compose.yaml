@@ -70,7 +70,7 @@ services:
       HOMEPAGE_ALLOWED_HOSTS: "dash.skyelowry.com,dash.skyelowry.com:3000,192.168.2.5:3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homepage.rule=Host(`dash.skyelowry.com`)"
+      - "traefik.http.routers.homepage.rule=Host('dash.skyelowry.com')"
       - "traefik.http.routers.homepage.entrypoints=websecure" # Use 443
       - "traefik.http.routers.homepage.tls=true"
       - "traefik.http.routers.homepage.tls.certresolver=cloudflare" 
