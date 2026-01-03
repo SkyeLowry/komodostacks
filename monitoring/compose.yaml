@@ -1,1 +1,98 @@
+services:
 
+  splunk:
+    image: splunk/splunk:latest
+    container_name: splunk
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_GENERAL_TERMS=--accept-sgt-current-at-splunk-com
+      - SPLUNK_PASSWORD=${PASSWORD}
+      - SPLUNK_HEC_TOKEN=${HEC_TOKEN}
+      - SPLUNK_HEC_ENABLED=true
+      - SPLUNK_HEC_SSL=false  # Set to true for HTTPS
+    #ports:
+      #- "8002:8000"   # Web UI
+#      - "8082:8088"   # HEC endpoint
+#      - "8089:8089"   # Management port
+    volumes:
+      - ${STORAGE_LOCATION}/splunk-etc:/opt/splunk/etc
+      - ${STORAGE_LOCATION}/splunk-var:/opt/splunk/var
+    networks:
+      - app-monitoring-net
+    restart: unless-stopped
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.splunk.rule=Host(`splunk.skyelowry.com`)"
+      - "traefik.http.routers.splunk.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.splunk.tls=true"
+      - "traefik.http.routers.splunk.tls.certresolver=cloudflare" 
+      - "traefik.http.services.splunk.loadbalancer.server.port=8080"
+      # --- Homepage Discovery ---
+      - "homepage.group=Monitoring"
+      - "homepage.name=Splunk"
+      - "homepage.icon=splunk.png"
+      - "homepage.href=https://splunk.skyelowry.com"
+      - "homepage.description=Splunk Logging"
+
+  leader:
+    container_name: cribl_leader
+    hostname: cribl_leader
+    image: cribl/cribl:latest
+    environment:
+      - CRIBL_DIST_MODE=master
+      - CRIBL_VOLUME_DIR=/opt/cribl/config-volume
+      - TZ=${TZ}
+    ports:
+      - "4200:4200"
+    volumes:
+      - ${STORAGE_LOCATION}/cribl-leader:/opt/cribl/config-volume
+    networks:
+      - app-monitoring-net
+    restart: unless-stopped
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.cribl.rule=Host(`cribl.skyelowry.com`)"
+      - "traefik.http.routers.cribl.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.cribl.tls=true"
+      - "traefik.http.routers.cribl.tls.certresolver=cloudflare" 
+      - "traefik.http.services.cribl.loadbalancer.server.port=4200"
+      # --- Homepage Discovery ---
+      - "homepage.group=Monitoring"
+      - "homepage.name=Cribl"
+      - "homepage.icon=cribl.png"
+      - "homepage.href=https://cribl.skyelowry.com"
+      - "homepage.description=Cribl Logging"
+      
+  workers:
+    container_name: cribl_worker
+    hostname: cribl_worker
+    image: cribl/cribl:latest
+    depends_on: 
+      - leader
+    environment:
+      - CRIBL_DIST_MODE=worker
+      - CRIBL_DIST_LEADER_URL=${LEADER_URL}
+      - TZ=${TZ}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/journal:/var/log/journal:ro
+      - /:/rootfs:ro
+    ports:
+      - 8088:8088
+      - 5514:5514/udp
+      - 5514:5514/tcp
+      - 6514:6514/udp
+      - 6514:6514/tcp
+    networks:
+      - app-monitoring-net
+    restart: unless-stopped
+    
+
+networks:
+  app-monitoring-net:
+    name: app-monitoring-net
