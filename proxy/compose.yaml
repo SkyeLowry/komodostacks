@@ -32,7 +32,7 @@ services:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${STORAGE_LOCATION}/traefik/cert:/cert/acme.json # For SSL cert storage
+      - ${STORAGE_LOCATION}/traefik/cert:/cert # For SSL cert storage
     networks:
       - frontend-net
 
