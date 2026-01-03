@@ -11,7 +11,25 @@ services:
     networks:
       - app-ai-net
       - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.openwebui.rule=Host(`ai.skyelowry.com`)"
+      - "traefik.http.routers.openwebui.entrypoints=web" # Change to websecure once SSL is set up
+      - "traefik.http.services.openwebui.loadbalancer.server.port=8080"
+      
+      # --- Homepage Discovery ---
+      - "homepage.group=AI"
+      - "homepage.name=Open WebUI"
+      - "homepage.icon=open-webui.png"
+      - "homepage.href=http://ai.skyelowry.com"
+      - "homepage.description=Local LLM Interface"
+      - "homepage.widget.type=openwebui"
+      - "homepage.widget.url=http://open-webui:8080" # Internal container address
+      - "homepage.widget.key=${WEBUI_SECRET_KEY}"
 
 networks:
   app-ai-net:
     name: "app-ai-net"
+  frontend-net:
+    external: true
