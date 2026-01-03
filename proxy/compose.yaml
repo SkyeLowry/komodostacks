@@ -13,7 +13,7 @@ services:
     labels:
       - "traefik.enable=true"
       # This router handles both the API and the Dashboard UI
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=web" # Or websecure if you have SSL
     ports:
