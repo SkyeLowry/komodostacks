@@ -24,9 +24,6 @@ services:
       - "homepage.icon=open-webui.png"
       - "homepage.href=http://ai.skyelowry.com"
       - "homepage.description=Local LLM Interface"
-      - "homepage.widget.type=openwebui"
-      - "homepage.widget.url=http://open-webui:8080" # Internal container address
-      - "homepage.widget.key=${WEBUI_SECRET_KEY}"
 
 networks:
   app-ai-net:
