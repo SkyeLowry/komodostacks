@@ -29,7 +29,6 @@ services:
     ports:
       - 192.168.2.5:80:80
       - 192.168.2.5:443:443
-      - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${STORAGE_LOCATION}/traefik/cert:/cert # For SSL cert storage
