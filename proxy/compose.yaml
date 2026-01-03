@@ -28,6 +28,12 @@ services:
       - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=web" # Or websecure if you have SSL
+                  # --- Homepage Discovery ---
+      - "homepage.group=Infra"
+      - "homepage.name=Traefik"
+      #- "homepage.icon=open-webui.png"
+      - "homepage.href=http://traefik.skyelowry.home/dashboard/"
+      - "homepage.description=Traefik Dashboard"
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     ports:
