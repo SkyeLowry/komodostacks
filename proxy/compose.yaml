@@ -14,12 +14,18 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--providers.docker.network=frontend-net"
+      # --- SSL CONFIGURATION ---
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cloudflare.acme.email=patrickskyelowry@gmail.com"
+      - "--certificatesresolvers.cloudflare.acme.storage=/acme.json"
     labels:
       - "traefik.enable=true"
       # This router handles both the API and the Dashboard UI
       - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=web" # Or websecure if you have SSL
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     ports:
       - 192.168.2.5:80:80
       - 192.168.2.5:443:443
