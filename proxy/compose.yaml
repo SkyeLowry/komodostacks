@@ -8,7 +8,11 @@ services:
       - no-new-privileges:true
     command:
       - "--api.dashboard=true"
-      # Set the default network for Traefik to look for containers
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=frontend-net"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
       - "--providers.docker.network=frontend-net"
     labels:
       - "traefik.enable=true"
@@ -19,7 +23,6 @@ services:
     ports:
       - 192.168.2.5:80:80
       - 192.168.2.5:443:443
-      - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${STORAGE_LOCATION}/traefik/acme.json:/acme.json # For SSL cert storage
