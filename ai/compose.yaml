@@ -17,7 +17,6 @@ services:
       - "traefik.http.routers.openwebui.rule=Host(`ai.skyelowry.com`)"
       - "traefik.http.routers.openwebui.entrypoints=web" # Change to websecure once SSL is set up
       - "traefik.http.services.openwebui.loadbalancer.server.port=8080"
-      
       # --- Homepage Discovery ---
       - "homepage.group=AI"
       - "homepage.name=Open WebUI"
