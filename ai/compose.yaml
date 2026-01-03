@@ -23,7 +23,7 @@ services:
       - "homepage.group=AI"
       - "homepage.name=Open WebUI"
       - "homepage.icon=open-webui.png"
-      - "homepage.href=http://ai.skyelowry.com"
+      - "homepage.href=https://ai.skyelowry.com"
       - "homepage.description=Local LLM Interface"
 
 networks:
