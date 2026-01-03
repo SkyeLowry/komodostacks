@@ -10,6 +10,7 @@ services:
       - /mnt/Containers/stack-ai/open-webui-data:/app/backend/data
     networks:
       - app-ai-net
+      - frontend-net
 
 networks:
   app-ai-net:
