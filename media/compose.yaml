@@ -320,7 +320,6 @@ services:
       - "traefik.http.routers.qbittorrent.tls=true"
       - "traefik.http.routers.qbittorrent.tls.certresolver=cloudflare" 
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8082"
-      - "traefik.docker.network=app-media-net"
 
 
 
