@@ -11,8 +11,8 @@ services:
     environment:
         - NEO4J_AUTH=${NEO4J_AUTH}
     ports:
-      - 192.168.2.11:7474:7474
-      - 192.168.2.11:7687:7687
+    #  - 192.168.2.11:7474:7474
+    #  - 192.168.2.11:7687:7687
     restart: always
     networks:
       - frontend-net
