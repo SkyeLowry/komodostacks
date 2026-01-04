@@ -9,7 +9,7 @@ services:
       - ADVERTISE_IP=${PLEX_ADVERTISE_IP}
     volumes:
       - ${STORAGE_LOCATION}/plex-config:/config
-      - /Media/Plex:/Plex
+      - ${MEDIA_LOCATION}/Plex:/Plex
       - ${STORAGE_LOCATION}/plex-transcode:/transcode
     ports:
       - 32400:32400/tcp
@@ -37,8 +37,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/sonarr-config:/config
-      - /Media/deluge-downloads:/downloads
-      - /Media/Plex:/Plex
+      - ${MEDIA_LOCATION}/deluge-downloads:/downloads
+      - ${MEDIA_LOCATION}/Plex:/Plex
     networks:
       - app-media-net
     #ports:
@@ -55,8 +55,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/radarr-config:/config
-      - /Media/deluge-downloads:/downloads
-      - /Media/Plex:/Plex
+      - ${MEDIA_LOCATION}/deluge-downloads:/downloads
+      - ${MEDIA_LOCATION}/Plex:/Plex
     #ports:
       #- 7878:7878
     networks:
@@ -105,7 +105,7 @@ services:
       - QBT_WEBUI_PORT=8082
     volumes:
       - ${STORAGE_LOCATION}/qbittorrent-config:/config
-      - /Media/deluge-downloads:/downloads
+      - ${MEDIA_LOCATION}/deluge-downloads:/downloads
     tmpfs:
       - /tmp
     network_mode: "service:gluetun"
@@ -157,7 +157,7 @@ services:
     volumes:
       - ${STORAGE_LOCATION}/jellyfin-config:/config
       - ${STORAGE_LOCATION}/jellyfin-cache:/cache
-      - /Media/Plex:/media
+      - ${MEDIA_LOCATION}/Plex:/media
     restart: 'unless-stopped'
 
 
