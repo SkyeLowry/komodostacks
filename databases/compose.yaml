@@ -16,6 +16,20 @@ services:
     restart: always
     networks:
       - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.neo4j.rule=Host(`neo4j.skyelowry.com`)"
+      - "traefik.http.routers.neo4j.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.neo4j.tls=true"
+      - "traefik.http.routers.neo4j.tls.certresolver=cloudflare" 
+      - "traefik.http.services.neo4j.loadbalancer.server.port=7474"
+      # --- Homepage Discovery ---
+      - "homepage.group=App"
+      - "homepage.name=Neo4j"
+      - "homepage.icon=neo4j.png"
+      - "homepage.href=https://neo4j.skyelowry.com"
+      - "homepage.description=Neo4j Graph DB"
 
 
   influxdb2:
@@ -36,7 +50,19 @@ services:
       - ${STORAGE_LOCATION}/influxdb2-config:/etc/influxdb2
     networks:
       - frontend-net
-
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.influxdb.rule=Host(`influxdb.skyelowry.com`)"
+      - "traefik.http.routers.influxdb.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.influxdb.tls=true"
+      - "traefik.http.routers.influxdb.tls.certresolver=cloudflare" 
+      - "traefik.http.services.influxdb.loadbalancer.server.port=8086"
+      # --- Homepage Discovery ---
+      - "homepage.group=App"
+      - "homepage.name=Influx DB"
+      - "homepage.icon=influxdb.png"
+      - "homepage.href=https://influxdb.skyelowry.com"
+      - "homepage.description=influxdb2"
 
 networks:
   frontend-net:
