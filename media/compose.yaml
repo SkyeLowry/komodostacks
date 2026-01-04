@@ -12,14 +12,14 @@ services:
       - ${MEDIA_LOCATION}/Plex:/Plex
       - ${STORAGE_LOCATION}/plex-transcode:/transcode
     ports:
-      - 32400:32400/tcp
+      - 192.168.2.11:32400:32400/tcp
       #- 1900:1900/udp #Access to Plex DLNA Server
       #- 5353:5353/udp #older Bonjour/Avahi network discovery
-      - 32410:32410/udp #GDM Plex Network Discovery
-      - 32412:32412/udp #GDM Plex Network Discovery
-      - 32413:32413/udp #GDM Plex Network Discovery
-      - 32414:32414/udp #GDM Plex Network Discovery
-      - 32469:32469/tcp #Access to Plex DLNA Server
+      - 192.168.2.11:32410:32410/udp #GDM Plex Network Discovery
+      - 192.168.2.11:32412:32412/udp #GDM Plex Network Discovery
+      - 192.168.2.11:32413:32413/udp #GDM Plex Network Discovery
+      - 192.168.2.11:32414:32414/udp #GDM Plex Network Discovery
+      - 192.168.2.11:32469:32469/tcp #Access to Plex DLNA Server
     networks:
       - frontend-net
     #network_mode: "service:gluetun"
