@@ -35,11 +35,11 @@ services:
       - "traefik.http.routers.plex.tls.certresolver=cloudflare" 
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=plex"
+      - "homepage.group=Media"
+      - "homepage.name=Plex"
       - "homepage.icon=plex.png"
       - "homepage.href=https://plex.skyelowry.com"
-      - "homepage.description=plex"
+      - "homepage.description=Plex Media Library"
 
 
   sonarr:
@@ -67,11 +67,11 @@ services:
       - "traefik.http.routers.sonarr.tls.certresolver=cloudflare" 
       - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=sonarr"
+      - "homepage.group=Media"
+      - "homepage.name=Sonarr"
       - "homepage.icon=sonarr.png"
       - "homepage.href=https://sonarr.skyelowry.com"
-      - "homepage.description=sonarr"
+      - "homepage.description=Media Library - TV Shows"
 
 
   radarr:
@@ -99,11 +99,11 @@ services:
       - "traefik.http.routers.radarr.tls.certresolver=cloudflare" 
       - "traefik.http.services.radarr.loadbalancer.server.port=7878"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=radarr"
+      - "homepage.group=Media"
+      - "homepage.name=Radarr"
       - "homepage.icon=radarr.png"
       - "homepage.href=https://radarr.skyelowry.com"
-      - "homepage.description=radarr"
+      - "homepage.description=Media Library - Movies"
 
   prowlarr:
     image: linuxserver/prowlarr:latest
@@ -128,11 +128,11 @@ services:
       - "traefik.http.routers.prowlarr.tls.certresolver=cloudflare" 
       - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=prowlarr"
+      - "homepage.group=Media"
+      - "homepage.name=Prowlarr"
       - "homepage.icon=prowlarr.png"
       - "homepage.href=https://prowlarr.skyelowry.com"
-      - "homepage.description=prowlarr"
+      - "homepage.description=Media Library - Torrent Index"
 
 
   nginx:
@@ -167,12 +167,11 @@ services:
     restart: unless-stopped
     labels:
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=qbittorrent"
+      - "homepage.group=Media"
+      - "homepage.name=Qbittorrent"
       - "homepage.icon=qbittorrent.png"
       - "homepage.href=https://qbittorrent.skyelowry.com"
-      - "homepage.description=qbittorrent"
-
+      - "homepage.description=Torrent Downloading"
 
   overseerr:
     image: sctx/overseerr:latest
@@ -195,11 +194,11 @@ services:
       - "traefik.http.routers.overseerr.tls.certresolver=cloudflare" 
       - "traefik.http.services.overseerr.loadbalancer.server.port=5055"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=overseerr"
+      - "homepage.group=Media"
+      - "homepage.name=Overseerr"
       - "homepage.icon=overseerr.png"
       - "homepage.href=https://overseerr.skyelowry.com"
-      - "homepage.description=overseerr"
+      - "homepage.description=Media Request Management"
 
 
   tautulli:
@@ -225,8 +224,8 @@ services:
       - "traefik.http.routers.tautulli.tls.certresolver=cloudflare" 
       - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=tautulli"
+      - "homepage.group=Media"
+      - "homepage.name=Tautulli"
       - "homepage.icon=tautulli.png"
       - "homepage.href=https://tautulli.skyelowry.com"
       - "homepage.description=tautulli"
@@ -251,11 +250,11 @@ services:
     restart: 'unless-stopped'
     labels:
       # --- Homepage Discovery ---
-      - "homepage.group=App"
-      - "homepage.name=jellyfin"
+      - "homepage.group=Media"
+      - "homepage.name=Jellyfin"
       - "homepage.icon=jellyfin.png"
       - "homepage.href=https://jellyfin.skyelowry.com"
-      - "homepage.description=jellyfin"
+      - "homepage.description=Jellyfin Media"
 
 
   jellyplexwatched:
