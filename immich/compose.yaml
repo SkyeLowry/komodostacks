@@ -37,6 +37,20 @@ services:
     restart: always
     healthcheck:
       disable: false
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich.rule=Host(`immich.skyelowry.com`)"
+      - "traefik.http.routers.immich.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.immich.tls=true"
+      - "traefik.http.routers.immich.tls.certresolver=cloudflare" 
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
+      # --- Homepage Discovery ---
+      - "homepage.group=App"
+      - "homepage.name=Immich"
+      - "homepage.icon=immich.png"
+      - "homepage.href=https://immich.skyelowry.com"
+      - "homepage.description=immich"
 
   immich-machine-learning:
     container_name: immich_machine_learning
