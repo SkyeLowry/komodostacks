@@ -43,6 +43,7 @@ services:
       - ${STORAGE_LOCATION}/influxdb2-config:/etc/influxdb2
     networks:
       - frontend-net
+    labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
       - "traefik.http.routers.influxdb.rule=Host(`influxdb.skyelowry.com`)"
