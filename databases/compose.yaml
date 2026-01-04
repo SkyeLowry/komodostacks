@@ -1,0 +1,43 @@
+services:
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    volumes:
+        - ${STORAGE_LOCATION}/neo4j/logs:/logs
+        - ${STORAGE_LOCATION}/neo4j/config:/config
+        - ${STORAGE_LOCATION}/neo4j/data:/data
+        - ${STORAGE_LOCATION}/neo4j/plugins:/plugins
+        - ${STORAGE_LOCATION}/neo4j/import:/import
+    environment:
+        - NEO4J_AUTH=${NEO4J_AUTH}
+    ports:
+      - 192.168.2.11:7474:7474
+      - 192.168.2.11:7687:7687
+    restart: always
+    networks:
+      - frontend-net
+
+
+  influxdb2:
+    container_name: influxdb
+    image: influxdb:2
+    restart: unless-stopped
+    ports:
+      - 192.168.2.11:8086:8086
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: ${DOCKER_INFLUXDB_INIT_MODE}
+      DOCKER_INFLUXDB_INIT_USERNAME: ${DOCKER_INFLUXDB_INIT_USERNAME}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${DOCKER_INFLUXDB_INIT_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
+      DOCKER_INFLUXDB_INIT_ORG: ${DOCKER_INFLUXDB_INIT_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${DOCKER_INFLUXDB_INIT_BUCKET}
+    volumes:
+      - ${STORAGE_LOCATION}/influxdb2-data:/var/lib/influxdb2
+      - ${STORAGE_LOCATION}/influxdb2-config:/etc/influxdb2
+    networks:
+      - frontend-net
+
+
+networks:
+  frontend-net:
+    external: true
