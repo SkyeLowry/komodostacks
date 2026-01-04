@@ -1,0 +1,30 @@
+http:
+  routers:
+    jellyfin-router:
+      rule: "Host(`jellyfin.skyelowry.com`)"
+      entryPoints:
+        - websecure
+      service: "jellyfin-service"
+      tls:
+        certResolver: "cloudflare"
+
+    # New Router for qBittorrent
+    qbittorrent-router:
+      rule: "Host(`qbittorrent.skyelowry.com`)"
+      entryPoints:
+        - websecure
+      service: "qbittorrent-service"
+      tls:
+        certResolver: "cloudflare"
+
+  services:
+    jellyfin-service:
+      loadBalancer:
+        servers:
+          - url: "http://traefik.skyelowry.home:8096" # The IP of the other host
+
+    # New Service for qBittorrent
+    qbittorrent-service:
+      loadBalancer:
+        servers:
+          - url: "http://traefik.skyelowry.home:8082"
