@@ -25,7 +25,7 @@ services:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-      - /dockervol/immich-serverdata:/data
+      - ${STORAGE_LOCATION}/immich-serverdata:/data
     ports:
       - '2283:2283'
     depends_on:
@@ -47,7 +47,7 @@ services:
     #   file: hwaccel.ml.yml
     #   service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes: 
-      - /dockertmp/immich-modelcache:/cache
+      - ${STORAGE_LOCATION}/immich-modelcache:/cache
     environment:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: ${DB_USERNAME}
@@ -62,7 +62,7 @@ services:
     container_name: immich_redis
     image: docker.io/valkey/valkey:8-bookworm
     volumes: 
-      - /dockervol/immich-redisdata:/data
+      - ${STORAGE_LOCATION}/immich-redisdata:/data
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
