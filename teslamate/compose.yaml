@@ -13,8 +13,8 @@ services:
       - MQTT_USERNAME=${MQTT_USERNAME}
       - MQTT_PASSWORD=${MQTT_PASSWORD}
       - MQTT_PORT=${MQTT_PORT}
-    ports:
-      - "192.168.2.11:4000:4000"
+    #ports:
+    #  - "192.168.2.11:4000:4000"
     volumes:
       - ${STORAGE_LOCATION}/tesla-import:/opt/app/import
     cap_drop:
