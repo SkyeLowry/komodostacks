@@ -68,12 +68,13 @@ services:
     depends_on:
       - traefik
     volumes:
-      - ${STORAGE_LOCATION}/homepage-config:/app/config
+      - /mnt/containers/stacks/homepage-config:/app/config
+      - ${STORAGE_LOCATION}/homepage-logs:/app/config/logs
       - /var/run/docker.sock:/var/run/docker.sock:ro # For service status widgets
     networks:
       - frontend-net
-    ports:
-      - 3000:3000
+    #ports:
+    #  - 3000:3000
     environment:
       HOMEPAGE_ALLOWED_HOSTS: "dash.skyelowry.com,dash.skyelowry.com:3000,192.168.2.5:3000"
     labels:
