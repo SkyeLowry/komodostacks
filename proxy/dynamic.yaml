@@ -23,8 +23,8 @@ http:
         servers:
           - url: "http://traefik.skyelowry.home:8096" # The IP of the other host
 
-    # New Service for qBittorrent
     qbittorrent-service:
       loadBalancer:
         servers:
           - url: "http://traefik.skyelowry.home:8082"
+
