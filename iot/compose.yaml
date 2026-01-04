@@ -7,7 +7,7 @@ services:
       - PGID=1000
       - TZ=${TZ}
     volumes:
-      - /dockervol/grocy-config:/config
+      - ${STORAGE_LOCATION}/grocy-config:/config
     networks:
       - frontend-net
     restart: unless-stopped
@@ -28,7 +28,7 @@ services:
       - 19444:19444
       - 19445:19445
     volumes:
-      - /dockervol/hyperion-config:/root/.hyperion
+      - ${STORAGE_LOCATION}/hyperion-config:/root/.hyperion
     networks:
       - frontend-net
     restart: unless-stopped
@@ -44,15 +44,15 @@ services:
     image: ghcr.io/blakeblackshear/frigate:0.17.0-beta1
     shm_size: "512mb" # update for your cameras based on calculation above
     devices:
-      - ${CORALUSBPASS}:${CORALUSBPASS} # Passes the USB Coral, needs to be modified for other versions
+      #- ${CORALUSBPASS}:${CORALUSBPASS} # Passes the USB Coral, needs to be modified for other versions
       - /dev/dri/renderD128:/dev/dri/renderD128 # For intel hwaccel, needs to be updated for your hardware
     environment:
       - TZ=${TZ}
       - PLUS_API_KEY=${PLUS_API_KEY}
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /dockervol/frigate-config:/config
-      - /Media/frigate-video:/media
+      - ${STORAGE_LOCATION}/frigate-config:/config
+      - /mnt/nfsmedia/frigate-video:/media
       - type: tmpfs 
         target: /tmp/cache
         tmpfs:
