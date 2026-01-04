@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.hyperion.entrypoints=websecure" # Use 443
       - "traefik.http.routers.hyperion.tls=true"
       - "traefik.http.routers.hyperion.tls.certresolver=cloudflare" 
-      - "traefik.http.services.hyperion.loadbalancer.server.port=8092"
+      - "traefik.http.services.hyperion.loadbalancer.server.port=8090"
       # --- Homepage Discovery ---
       - "homepage.group=Apps"
       - "homepage.name=Hyperion"
