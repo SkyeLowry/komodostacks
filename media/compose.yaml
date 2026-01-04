@@ -312,14 +312,14 @@ services:
       - "traefik.http.routers.jellyfin.entrypoints=websecure" # Use 443
       - "traefik.http.routers.jellyfin.tls=true"
       - "traefik.http.routers.jellyfin.tls.certresolver=cloudflare" 
-      - "traefik.http.services.jellyfin.loadBalancer.servers.url=http://traefik.skyelowry.home:8096"
+      - "traefik.http.services.jellyfin.loadBalancer.servers.url='http://traefik.skyelowry.home:8096'"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.skyelowry.com`)"
       - "traefik.http.routers.qbittorrent.entrypoints=websecure" # Use 443
       - "traefik.http.routers.qbittorrent.tls=true"
       - "traefik.http.routers.qbittorrent.tls.certresolver=cloudflare" 
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8082"
 
-
+http://traefik.skyelowry.home:8096/
 
 networks:
   app-media-net:
