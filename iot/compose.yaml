@@ -86,6 +86,7 @@ services:
       - "traefik.http.routers.frigate.tls=true"
       - "traefik.http.routers.frigate.tls.certresolver=cloudflare" 
       - "traefik.http.services.frigate.loadbalancer.server.port=8971"
+      - "traefik.http.services.frigate.loadbalancer.server.scheme=https"
       # --- Homepage Discovery ---
       - "homepage.group=Home"
       - "homepage.name=Frigate"
