@@ -59,8 +59,8 @@ services:
       - DATABASE_PASS=${DATABASE_PASS}
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_HOST=${DATABASE_HOST}
-    ports:
-      - "192.168.2.11:3000:3000"
+    #ports:
+    #  - "192.168.2.11:3000:3000"
     volumes:
       - ${STORAGE_LOCATION}/teslamate-grafana-data:/var/lib/grafana
     networks:
