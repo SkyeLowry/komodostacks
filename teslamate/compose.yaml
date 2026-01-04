@@ -33,9 +33,9 @@ services:
       # --- Homepage Discovery ---
       - "homepage.group=App"
       - "homepage.name=Teslamate"
-      #- "homepage.icon=teslamate.png"
+      - "homepage.icon=teslamate.png"
       - "homepage.href=https://teslamate.skyelowry.com"
-      #- "homepage.description=teslamate"
+      - "homepage.description=Vehicle Logging"
 
   database:
     image: postgres:17
