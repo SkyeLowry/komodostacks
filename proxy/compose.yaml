@@ -68,7 +68,7 @@ services:
     depends_on:
       - traefik
     volumes:
-      - /mnt/containers/stacks/homepage-config:/app/config
+      - /mnt/containers/stacks/proxy/homepage-config:/app/config
       - ${STORAGE_LOCATION}/homepage-logs:/app/config/logs
       - /var/run/docker.sock:/var/run/docker.sock:ro # For service status widgets
     networks:
