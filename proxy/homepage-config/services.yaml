@@ -6,13 +6,3 @@
     - Unifi:
         href: https://unifi.ui.com/consoles/A89C6C8605C80000000009857DB9000000000A0AFF0D0000000068EABFB4:88181522/network/default/dashboard
         description: Unifi Controller
-
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
-
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
