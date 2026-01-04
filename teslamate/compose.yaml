@@ -1,0 +1,82 @@
+services:
+  teslamate:
+    image: teslamate/teslamate:latest
+    container_name: teslamate
+    restart: unless-stopped
+    environment:
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASS=${DATABASE_PASS}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - MQTT_HOST=${MQTT_HOST}
+      - MQTT_USERNAME=${MQTT_USERNAME}
+      - MQTT_PASSWORD=${MQTT_PASSWORD}
+      - MQTT_PORT=${MQTT_PORT}
+    ports:
+      - "4000:4000"
+    volumes:
+      - ${STORAGE_LOCATION}/tesla-import:/opt/app/import
+    cap_drop:
+      - all
+    networks:
+      - app-teslamate-net
+      - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.teslamate.rule=Host(`teslamate.skyelowry.com`)"
+      - "traefik.http.routers.teslamate.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.teslamate.tls=true"
+      - "traefik.http.routers.teslamate.tls.certresolver=cloudflare" 
+      - "traefik.http.services.teslamate.loadbalancer.server.port=4000"
+      # --- Homepage Discovery ---
+      - "homepage.group=App"
+      - "homepage.name=Teslamate"
+      #- "homepage.icon=teslamate.png"
+      - "homepage.href=https://teslamate.skyelowry.com"
+      #- "homepage.description=teslamate"
+
+  database:
+    image: postgres:17
+    container_name: teslamate-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASS}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - ${STORAGE_LOCATION}/teslamate-db:/var/lib/postgresql/data
+    networks:
+      - app-teslamate-net
+
+  grafana:
+    image: teslamate/grafana:latest
+    container_name: teslamate-grafana
+    restart: unless-stopped
+    environment:
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASS=${DATABASE_PASS}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${STORAGE_LOCATION}/teslamate-grafana-data:/var/lib/grafana
+    networks:
+      - app-teslamate-net
+      - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.teslamategraph.rule=Host(`teslamategraph.skyelowry.com`)"
+      - "traefik.http.routers.teslamategraph.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.teslamategraph.tls=true"
+      - "traefik.http.routers.teslamategraph.tls.certresolver=cloudflare" 
+      - "traefik.http.services.teslamategraph.loadbalancer.server.port=3000"
+
+networks:
+  app-teslamate-net:
+    name: app-teslamate-net
+  frontend-net:
+    external: true
