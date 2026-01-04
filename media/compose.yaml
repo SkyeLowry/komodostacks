@@ -1,0 +1,217 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - ADVERTISE_IP=${PLEX_ADVERTISE_IP}
+    volumes:
+      - ${STORAGE_LOCATION}/plex-config:/config
+      - /Media/Plex:/Plex
+      - ${STORAGE_LOCATION}/plex-transcode:/transcode
+    ports:
+      - 32400:32400/tcp
+      #- 1900:1900/udp #Access to Plex DLNA Server
+      #- 5353:5353/udp #older Bonjour/Avahi network discovery
+      - 32410:32410/udp #GDM Plex Network Discovery
+      - 32412:32412/udp #GDM Plex Network Discovery
+      - 32413:32413/udp #GDM Plex Network Discovery
+      - 32414:32414/udp #GDM Plex Network Discovery
+      - 32469:32469/tcp #Access to Plex DLNA Server
+    networks:
+      - app-media-net
+    #network_mode: "service:gluetun"
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    restart: unless-stopped
+
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/sonarr-config:/config
+      - /Media/deluge-downloads:/downloads
+      - /Media/Plex:/Plex
+    networks:
+      - app-media-net
+    #ports:
+      #- 8989:8989
+    restart: 'unless-stopped'
+
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/radarr-config:/config
+      - /Media/deluge-downloads:/downloads
+      - /Media/Plex:/Plex
+    #ports:
+      #- 7878:7878
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/prowlarr-config:/config
+    #ports:
+      #- 9696:9696
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/nginx-config:/etc/nginx
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+  qbittorrent:
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - QBT_LEGAL_NOTICE=
+      - QBT_TORRENTING_PORT=34524
+      - QBT_WEBUI_PORT=8082
+    volumes:
+      - ${STORAGE_LOCATION}/qbittorrent-config:/config
+      - /Media/deluge-downloads:/downloads
+    tmpfs:
+      - /tmp
+    network_mode: "service:gluetun"
+    restart: unless-stopped
+
+
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/overseerr-config:/app/config
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/tautulli-config:/config
+    #ports:
+      #- 8181:8181
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    #ports:
+    #  - 8096:8096
+    network_mode: "service:gluetun"
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    volumes:
+      - ${STORAGE_LOCATION}/jellyfin-config:/config
+      - ${STORAGE_LOCATION}/jellyfin-cache:/cache
+      - /Media/Plex:/media
+    restart: 'unless-stopped'
+
+
+  jellyplexwatched:
+    image: luigi311/jellyplex-watched:latest
+    container_name: jellyplexwatched
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+      DRYRUN: False
+      PLEX_BASEURL: ${PLEX_ADVERTISE_IP}
+      PLEX_TOKEN: ${WATCHED_PLEX_TOKEN}
+      JELLYFIN_BASEURL: ${WATCHED_JELLYFIN_BASEURL}
+      JELLYFIN_TOKEN: ${WATCHED_JELLYFIN_TOKEN}
+      USER_MAPPING: ${WATCHED_USER_MAPPING}
+      LIBRARY_MAPPING: ${WATCHED_LIBRARY_MAPPING}
+      SYNC_FROM_PLEX_TO_JELLYFIN: ${WATCHED_SYNC_FROM_PLEX_TO_JELLYFIN}
+      SYNC_FROM_PLEX_TO_PLEX: ${WATCHED_SYNC_FROM_PLEX_TO_PLEX}
+      SYNC_FROM_JELLYFIN_TO_PLEX: ${WATCHED_SYNC_FROM_JELLYFIN_TO_PLEX}
+      SYNC_FROM_JELLYFIN_TO_JELLYFIN: ${WATCHED_SYNC_FROM_JELLYFIN_TO_JELLYFIN}
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+    depends_on:
+      plex:
+        condition: service_healthy
+      jellyfin:
+        condition: service_healthy
+
+
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    ports:
+      - 34524:34524/tcp
+      - 8096:8096/tcp #Jellyfin External and Internal
+      - 8082:8082/tcp #qbittorrent
+    environment:
+      - VPN_SERVICE_PROVIDER=custom
+      - VPN_TYPE=wireguard
+      - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${STORAGE_LOCATION}/gluetun-config/wg0.conf:/gluetun/wireguard/wg0.conf       # store credentials & state
+    networks:
+      - app-media-net
+    restart: 'unless-stopped'
+
+
+
+networks:
+  app-media-net:
+    name: app-media-net
