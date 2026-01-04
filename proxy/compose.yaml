@@ -18,8 +18,6 @@ services:
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.cloudflare.acme.email=patrickskyelowry@gmail.com"
       - "--certificatesresolvers.cloudflare.acme.storage=/cert/acme.json"
-      - "--providers.file.directory=/config/dynamic.yaml"
-      - "--providers.file.watch=true"
       # --- LOGGING
       #- "--log.level=DEBUG"             # Provides detailed SSL/ACME info
       #- "--log.filepath="               # Empty path forces logs to stdout (Komodo)
