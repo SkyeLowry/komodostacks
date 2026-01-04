@@ -10,7 +10,7 @@ services:
         - ${STORAGE_LOCATION}/neo4j/import:/import
     environment:
         - NEO4J_AUTH=${NEO4J_AUTH}
-    ports:
+    #ports:
     #  - 192.168.2.11:7474:7474
     #  - 192.168.2.11:7687:7687
     restart: always
