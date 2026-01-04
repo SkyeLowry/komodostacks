@@ -22,11 +22,11 @@ services:
       - PGID=1000
       - TZ=${TZ}
     ports:
-      - 8090:8090
-      - 8092:8092
-      - 19400:19400
-      - 19444:19444
-      - 19445:19445
+      - 192.168.2.11:8090:8090
+      - 192.168.2.11:8092:8092
+      - 192.168.2.11:19400:19400
+      - 192.168.2.11:19444:19444
+      - 192.168.2.11:19445:19445
     volumes:
       - ${STORAGE_LOCATION}/hyperion-config:/root/.hyperion
     networks:
@@ -60,11 +60,11 @@ services:
     networks:
       - frontend-net
     ports:
-      - "8971:8971"
-      #- "5000:5000" # Internal unauthenticated access. Expose carefully.
-      - "8554:8554" # RTSP feeds
-      - "8555:8555/tcp" # WebRTC over tcp
-      - "8555:8555/udp" # WebRTC over udp
+      - "192.168.2.11:8971:8971"
+      #- "192.168.2.11:5000:5000" # Internal unauthenticated access. Expose carefully.
+      - "192.168.2.11:8554:8554" # RTSP feeds
+      - "192.168.2.11:8555:8555/tcp" # WebRTC over tcp
+      - "192.168.2.11:8555:8555/udp" # WebRTC over udp
 
 networks:
   frontend-net:
