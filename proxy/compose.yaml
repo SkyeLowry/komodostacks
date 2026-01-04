@@ -43,7 +43,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${STORAGE_LOCATION}/traefik/cert:/cert # For SSL cert storage
-      - ${STORAGE_LOCATION}/traefik/dynamic:/dynamic # For SSL cert storage
+      - /mnt/containers/stacks/proxy/dynamic.yaml:/dynamic/dynamic.yaml # For SSL cert storage
     networks:
       - frontend-net
 
