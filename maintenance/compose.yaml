@@ -12,7 +12,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/duplicacy-config:/config
-      - ${STORAGE_LOCATION}duplicacy-logs:/logs
+      - ${STORAGE_LOCATION}/logs/duplicacy:/logs
       - ${STORAGE_LOCATION}/duplicacy-cache:/cache
       - ${MEDIA_LOCATION}:/Media:ro
       - ${MEDIA_LOCATION}/Restore:/Restore
