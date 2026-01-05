@@ -254,8 +254,12 @@ services:
       - "homepage.name=Jellyfin"
       - "homepage.icon=jellyfin.png"
       - "homepage.href=https://jellyfin.skyelowry.com"
-      - "homepage.description=Jellyfin Media"
-
+      - "homepage.description=Media Server"
+      - "homepage.widget.type=jellyfin"
+      - "homepage.widget.url=${WATCHED_JELLYFIN_BASEURL}"
+      - "homepage.widget.key=${WATCHED_JELLYFIN_TOKEN}"
+      - "homepage.widget.enableBlocks=true"
+      - "homepage.widget.enableNowPlaying=true"
 
   jellyplexwatched:
     image: luigi311/jellyplex-watched:latest
