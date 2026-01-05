@@ -148,6 +148,9 @@ services:
       - frontend-net
     restart: 'unless-stopped'
 
+
+
+
   qbittorrent:
     image: qbittorrentofficial/qbittorrent-nox:latest
     container_name: qbittorrent
