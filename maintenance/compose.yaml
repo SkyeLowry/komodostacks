@@ -127,7 +127,7 @@ volumes:
   hass_config:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw,vers=3.0"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST}"
       device: "//${HASS_HOST}/config"
   hass_media:
     driver_opts:
