@@ -157,7 +157,7 @@ volumes:
   hass_ssl:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/ssl"
 
 
