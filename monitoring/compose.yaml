@@ -32,7 +32,7 @@ services:
       - "homepage.widget.url=http://glances:61208"
       # Glances API version; Homepage uses this to choose /api/{version}/ endpoints.
       # If this doesn't match what Glances serves, Homepage's widget can crash client-side.
-      - "homepage.widget.version=3"
+      - "homepage.widget.version=4"
 
   splunk:
     image: splunk/splunk:latest
