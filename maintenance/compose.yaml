@@ -129,6 +129,7 @@ services:
 
 networks:
   scanopy:
+    name: scanopy
     driver: bridge
     ipam:
       config:
@@ -137,9 +138,3 @@ networks:
 
   frontend-net:
     external: true
-  scanopy:
-    name: scanopy
-
-
-      
-      
