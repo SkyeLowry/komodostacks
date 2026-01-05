@@ -94,6 +94,11 @@ services:
       - "homepage.icon=frigate.png"
       - "homepage.href=https://frigate.skyelowry.com"
       - "homepage.description=Security Cameras"
+      - "homepage.widget.type=frigate"
+      - "homepage.widget.url=http://frigate.skyelowry.com"
+      - "homepage.widget.enableRecentEvents=true"
+      - "homepage.widget.username=${FRIGATE_USERNAME}"
+      - "homepage.widget.password=${FRIGATE_PASSWORD}"
       
 networks:
   frontend-net:
