@@ -14,3 +14,7 @@
     - TrueNAS:
         href: https://truenas.skyelowry.home
         description: TrueNAS
+
+    - Cloudflare:
+        href: https://one.dash.cloudflare.com
+        description: Cloudflare ZeroTrust
