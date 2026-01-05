@@ -59,7 +59,7 @@ services:
       - frontend-net
     depends_on:
       - traefik
-    label:
+    labels:
         # --- Homepage Discovery ---
       - "homepage.group=Infra"
       - "homepage.name=Cloudflare Tunnels"
