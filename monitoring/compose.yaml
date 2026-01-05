@@ -30,47 +30,6 @@ services:
       - "homepage.description=System Monitor"
       # Widget disabled (avoids Homepage widget rendering errors)
 
-  splunk:
-    image: splunk/splunk:latest
-    container_name: splunk
-    # The official Splunk image runs as the `splunk` user (uid/gid 41812).
-    # If you bind-mount host directories into /opt/splunk/etc or /opt/splunk/var,
-    # ensure they are readable/writable by 41812:41812 or Splunk may crash-loop.
-    user: "41812:41812"
-    environment:
-      - TZ=${TZ}
-      - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_GENERAL_TERMS=--accept-sgt-current-at-splunk-com
-      - SPLUNK_PASSWORD=${PASSWORD}
-      - SPLUNK_HEC_TOKEN=${HEC_TOKEN}
-      - SPLUNK_HEC_ENABLED=true
-      - SPLUNK_HEC_SSL=false  # Set to true for HTTPS
-    ports:
-      - "8000:8000"   # Web UI
-#      - "8082:8088"   # HEC endpoint
-#      - "8089:8089"   # Management port
-    volumes:
-      - ${STORAGE_LOCATION}/splunk-etc:/opt/splunk/etc
-      - ${STORAGE_LOCATION}/splunk-var:/opt/splunk/var
-    networks:
-      - app-monitoring-net
-      - frontend-net
-    restart: unless-stopped
-    labels:
-      # --- Traefik Routing ---
-      - "traefik.enable=true"
-      - "traefik.http.routers.splunk.rule=Host(`splunk.skyelowry.com`)"
-      - "traefik.http.routers.splunk.entrypoints=websecure" # Use 443
-      - "traefik.http.routers.splunk.tls=true"
-      - "traefik.http.routers.splunk.tls.certresolver=cloudflare" 
-      - "traefik.http.services.splunk.loadbalancer.server.port=8000"
-      # --- Homepage Discovery ---
-      - "homepage.group=Monitoring"
-      - "homepage.name=Splunk"
-      - "homepage.icon=splunk.png"
-      - "homepage.href=https://splunk.skyelowry.com"
-      - "homepage.description=Splunk Logging"
-
   leader:
     container_name: cribl_leader
     hostname: cribl_leader
