@@ -33,9 +33,11 @@ services:
   splunk:
     image: splunk/splunk:latest
     container_name: splunk
+    # The official Splunk image runs as the `splunk` user (uid/gid 41812).
+    # If you bind-mount host directories into /opt/splunk/etc or /opt/splunk/var,
+    # ensure they are readable/writable by 41812:41812 or Splunk may crash-loop.
+    user: "41812:41812"
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=${TZ}
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_GENERAL_TERMS=--accept-sgt-current-at-splunk-com
