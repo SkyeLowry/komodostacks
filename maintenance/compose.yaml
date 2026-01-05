@@ -32,6 +32,20 @@ services:
     restart: unless-stopped
     networks:
       - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.duplicacy.rule=Host(`duplicacy.skyelowry.com`)"
+      - "traefik.http.routers.duplicacy.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.duplicacy.tls=true"
+      - "traefik.http.routers.duplicacy.tls.certresolver=cloudflare" 
+      - "traefik.http.services.duplicacy.loadbalancer.server.port=3875"
+      # --- Homepage Discovery ---
+      - "homepage.group=Infra"
+      - "homepage.name=Duplicacy"
+      - "homepage.icon=duplicacy.png"
+      - "homepage.href=https://duplicacy.skyelowry.com"
+      - "homepage.description=Backup Systems"
 
   daemon:
     image: ghcr.io/scanopy/scanopy/daemon:latest
@@ -98,6 +112,20 @@ services:
     networks:
       - scanopy
       - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.scanopy.rule=Host(`scanopy.skyelowry.com`)"
+      - "traefik.http.routers.scanopy.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.scanopy.tls=true"
+      - "traefik.http.routers.scanopy.tls.certresolver=cloudflare" 
+      - "traefik.http.services.scanopy.loadbalancer.server.port=60072"
+      # --- Homepage Discovery ---
+      - "homepage.group=Infra"
+      - "homepage.name=scanopy"
+      - "homepage.icon=scanopy.png"
+      - "homepage.href=https://scanopy.skyelowry.com"
+      - "homepage.description=scanopy"
 
 networks:
   scanopy:
