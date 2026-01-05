@@ -34,6 +34,14 @@ services:
       - ${STORAGE_LOCATION}/ollama:/root/.ollama
     networks:
       - frontend-net
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.ollama.rule=Host(`ollama.skyelowry.com`)"
+      - "traefik.http.routers.ollama.entrypoints=websecure" # Use 443
+      - "traefik.http.routers.ollama.tls=true"
+      - "traefik.http.routers.ollama.tls.certresolver=cloudflare" 
+      - "traefik.http.services.ollama.loadbalancer.server.port=11434"
 
 networks:
   frontend-net:
