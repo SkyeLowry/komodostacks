@@ -16,7 +16,7 @@ services:
       - ${STORAGE_LOCATION}/duplicacy-cache:/cache
       - ${MEDIA_LOCATION}:/Media:ro
       - ${MEDIA_LOCATION}/Restore:/Restore
-      - ${STORAGE_LOCATION}:/backup/dockervol:ro
+      - ${STORAGE_LOCATION}:/backup/appdata:ro
       #- /mnt/homeassistant/config:/backup/hass/config:ro
       #- /mnt/homeassistant/config:/backup/hass/config:ro
       #- /mnt/homeassistant/media:/backup/hass/media:ro
