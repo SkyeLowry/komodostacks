@@ -198,7 +198,10 @@ services:
       - "homepage.name=Overseerr"
       - "homepage.icon=overseerr.png"
       - "homepage.href=https://overseerr.skyelowry.com"
-      - "homepage.description=Media Request Management"
+      - "homepage.description=Media Requests"
+      - "homepage.widget.type=overseerr"
+      - "homepage.widget.url=http://overseerr:5055"
+      - "homepage.widget.key=${OVERSEERR_API_KEY}"
 
 
   tautulli:
