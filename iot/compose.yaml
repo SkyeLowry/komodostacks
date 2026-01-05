@@ -65,7 +65,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${STORAGE_LOCATION}/frigate-config:/config
-      - /mnt/nfsmedia/frigate-video:/media
+      - /mnt/Media/frigate-video:/media
       - type: tmpfs 
         target: /tmp/cache
         tmpfs:
