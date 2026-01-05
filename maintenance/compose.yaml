@@ -1,0 +1,117 @@
+-scanopy-env: &scanopy-env
+  SCANOPY_LOG_LEVEL: ${SCANOPY_LOG_LEVEL:-info}
+  SCANOPY_SERVER_PORT: ${SCANOPY_SERVER_PORT:-60072}
+  SCANOPY_DAEMON_PORT: ${SCANOPY_DAEMON_PORT:-60073}
+
+services:
+  duplicacy-web:
+    container_name: duplicacy
+    hostname: duplicacy
+    image: saspus/duplicacy-web:latest
+    ports:
+      - "3875:3875"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - ${STORAGE_LOCATION}/duplicacy-config:/config
+      - ${STORAGE_LOCATION}duplicacy-logs:/logs
+      - ${STORAGE_LOCATION}/duplicacy-cache:/cache
+      - ${MEDIA_LOCATION}:/Media:ro
+      - ${MEDIA_LOCATION}/Restore:/Restore
+      - ${STORAGE_LOCATION}:/backup/dockervol:ro
+      #- /mnt/homeassistant/config:/backup/hass/config:ro
+      #- /mnt/homeassistant/config:/backup/hass/config:ro
+      #- /mnt/homeassistant/media:/backup/hass/media:ro
+      #- /mnt/homeassistant/share:/backup/hass/share:ro
+      #- /mnt/homeassistant/addon_configs:/backup/hass/addon_configs:ro
+      #- /mnt/homeassistant/addons:/backup/hass/addons:ro
+      #- /mnt/homeassistant/backup:/backup/hass/backup:ro
+      #- /mnt/homeassistant/ssl:/backup/hass/ssl:ro
+    restart: unless-stopped
+    networks:
+      - frontend-net
+
+  daemon:
+    image: ghcr.io/scanopy/scanopy/daemon:latest
+    container_name: scanopy-daemon
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - 60073:60073
+    environment:
+      SCANOPY_SERVER_URL: http://traefik.skyelowry.home:60072
+      SCANOPY_PORT: 60073
+      SCANOPY_BIND_ADDRESS: 0.0.0.0
+      SCANOPY_NAME: ${SCANOPY_NAME:-scanopy-daemon}
+      SCANOPY_HEARTBEAT_INTERVAL: 30
+      SCANOPY_MODE: Push
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:${SCANOPY_DAEMON_PORT:-60073}/api/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - ${STORAGE_LOCATION}/scanopy/daemon-config:/root/.config/daemon
+      # Comment out the line below to disable docker discovery
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: scanopy-postgres
+    environment:
+      POSTGRES_DB: scanopy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    volumes:
+      - ${STORAGE_LOCATION}/scanopy/postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - scanopy
+
+
+  server:
+    image: ghcr.io/scanopy/scanopy/server:latest
+    container_name: scanopy-server
+    ports:
+      - 60072:60072
+    environment:
+      SCANOPY_DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/scanopy
+      SCANOPY_WEB_EXTERNAL_PATH: /app/static
+      SCANOPY_PUBLIC_URL: http://traefik:60072
+      SCANOPY_INTEGRATED_DAEMON_URL: http://172.31.0.1:60073
+    volumes:
+      - ${STORAGE_LOCATION}/scanopy/data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      daemon:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - scanopy
+      - frontend-net
+
+networks:
+  scanopy:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.1
+
+  frontend-net:
+    external: true
+  scanopy:
+    name: scanopy
+
+
+      
+      
