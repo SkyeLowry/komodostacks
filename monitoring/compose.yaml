@@ -1,7 +1,7 @@
 services:
 
 
-glances:
+  glances:
     container_name: glances
     image: nicolargo/glances:latest
     environment:
