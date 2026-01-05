@@ -127,32 +127,32 @@ volumes:
   hass_config:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/config"
   hass_media:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/media"
   hass_share:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/share"
   hass_addon_configs:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/addon_configs"
   hass_addons:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/addons"
   hass_backup:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,rw"
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
       device: "//${HASS_HOST}/backup"
   hass_ssl:
     driver_opts:
