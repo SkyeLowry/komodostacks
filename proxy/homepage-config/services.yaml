@@ -18,7 +18,3 @@
         description: TrueNAS
         icon: truenas.png
 
-    - Cloudflare:
-        href: https://one.dash.cloudflare.com
-        description: Cloudflare ZeroTrust
-        icon: cloudflare.png
