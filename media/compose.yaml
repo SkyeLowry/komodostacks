@@ -172,6 +172,10 @@ services:
       - "homepage.icon=qbittorrent.png"
       - "homepage.href=https://qbittorrent.skyelowry.com"
       - "homepage.description=Torrent Downloading"
+      - "homepage.widget.type=qbittorrent"
+      - "homepage.widget.url=http://traefik.skyelowry.home:8080"
+      - "homepage.widget.username=${QBIT_USERNAME}"
+      - "homepage.widget.password=${QBIT_PASSWORD}"
 
   overseerr:
     image: sctx/overseerr:latest
