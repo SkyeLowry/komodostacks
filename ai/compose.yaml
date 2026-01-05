@@ -4,12 +4,11 @@ services:
     container_name: open-webui
     restart: unless-stopped
     environment:
-      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://ollama:11434}
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
     volumes:
       - ${STORAGE_LOCATION}/open-webui-data:/app/backend/data
     networks:
-      - app-ai-net
       - frontend-net
     labels:
       # --- Traefik Routing ---
@@ -26,8 +25,16 @@ services:
       - "homepage.href=https://ai.skyelowry.com"
       - "homepage.description=Local LLM Interface"
 
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    volumes:
+      - ${STORAGE_LOCATION}/ollama:/root/.ollama
+    networks:
+      - frontend-net
+
 networks:
-  app-ai-net:
-    name: "app-ai-net"
   frontend-net:
     external: true
