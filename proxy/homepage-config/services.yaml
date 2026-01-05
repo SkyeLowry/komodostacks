@@ -10,3 +10,7 @@
     - Proxmox:
         href: https://proxmox.skyelowry.home:8006
         description: Proxmox Server
+
+    - TrueNAS:
+        href: https://truenas.skyelowry.home
+        description: TrueNAS
