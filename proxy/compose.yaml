@@ -32,7 +32,7 @@ services:
                   # --- Homepage Discovery ---
       - "homepage.group=Infra"
       - "homepage.name=Traefik"
-      #- "homepage.icon=open-webui.png"
+      - "homepage.icon=traefik.png"
       - "homepage.href=http://traefik.skyelowry.home/dashboard/"
       - "homepage.description=Traefik Dashboard"
     environment:
