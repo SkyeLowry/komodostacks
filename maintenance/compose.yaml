@@ -1,7 +1,3 @@
--scanopy-env: &scanopy-env
-  SCANOPY_LOG_LEVEL: ${SCANOPY_LOG_LEVEL:-info}
-  SCANOPY_SERVER_PORT: ${SCANOPY_SERVER_PORT:-60072}
-  SCANOPY_DAEMON_PORT: ${SCANOPY_DAEMON_PORT:-60073}
 
 services:
   duplicacy-web:
