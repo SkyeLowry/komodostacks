@@ -64,7 +64,7 @@ services:
       - "homepage.group=Infra"
       - "homepage.name=Cloudflare Tunnels"
       - "homepage.icon=cloudflare.png"
-      - "homepage.href=https://one.dash.cloudflare.com"
+      - "homepage.href=https://one.dash.cloudflare.com/${CF_ACCOUNT_ID}/overview"
       - "homepage.description=Cloudflare ZeroTrust Dashboard"
       # --- Cloudflared Widget Configuration ---
       - "homepage.widget.type=cloudflared"
