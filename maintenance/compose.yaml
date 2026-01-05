@@ -127,38 +127,38 @@ volumes:
   hass_config:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/config"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/config"
   hass_media:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/media"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/media"
   hass_share:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/share"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/share"
   hass_addon_configs:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/addon_configs"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/addon_configs"
   hass_addons:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/addons"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/addons"
   hass_backup:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/backup"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/backup"
   hass_ssl:
     driver_opts:
       type: cifs
-      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},soft,rw"
-      device: "//${HASS_HOST}/ssl"
+      o: "username=homeassistant,password=HomeAssRufus13,addr=homeassistant.skyelowry.home,nolock,soft,rw"
+      device: "//homeassistant.skyelowry.home/ssl"
 
 
 networks:
