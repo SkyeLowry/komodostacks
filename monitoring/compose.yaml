@@ -28,11 +28,7 @@ services:
       - "homepage.icon=glances.png"
       - "homepage.href=https://glances.skyelowry.com"
       - "homepage.description=System Monitor"
-      - "homepage.widget.type=glances"
-      - "homepage.widget.url=http://glances:61208"
-      # Glances API version; Homepage uses this to choose /api/{version}/ endpoints.
-      # If this doesn't match what Glances serves, Homepage's widget can crash client-side.
-      - "homepage.widget.version=4"
+      # Widget disabled (avoids Homepage widget rendering errors)
 
   splunk:
     image: splunk/splunk:latest
