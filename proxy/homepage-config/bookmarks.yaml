@@ -11,7 +11,10 @@
     - Reddit:
         - abbr: RE
           href: https://reddit.com/
-
+    - Bluesky:
+        - abbr: BS
+          href: https://https://bsky.app//
+          
 - Entertainment:
     - YouTube:
         - abbr: YT
