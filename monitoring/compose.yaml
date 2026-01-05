@@ -30,7 +30,7 @@ services:
       - "homepage.description=System Monitor"
       - "homepage.widget.type=glances"
       - "homepage.widget.url=http://glances:61208"
-      - "homepage.widget.version=3"
+      - "homepage.widget.version=4"
 
   splunk:
     image: splunk/splunk:latest
