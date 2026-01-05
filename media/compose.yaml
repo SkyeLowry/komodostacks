@@ -40,6 +40,10 @@ services:
       - "homepage.icon=plex.png"
       - "homepage.href=https://plex.skyelowry.com"
       - "homepage.description=Plex Media Library"
+      # --- Homepage Widget ---
+      - "homepage.widget.type=plex"
+      - "homepage.widget.url=http://plex:32400"
+      - "homepage.widget.key=${PLEX_TOKEN}"
 
 
   sonarr:
@@ -72,6 +76,11 @@ services:
       - "homepage.icon=sonarr.png"
       - "homepage.href=https://sonarr.skyelowry.com"
       - "homepage.description=Media Library - TV Shows"
+      # --- Homepage Widget ---
+      - "homepage.widget.type=sonarr"
+      - "homepage.widget.url=http://sonarr:8989"
+      - "homepage.widget.key=${SONARR_API_KEY}"
+      - "homepage.widget.enableQueue=true"
 
 
   radarr:
@@ -104,6 +113,11 @@ services:
       - "homepage.icon=radarr.png"
       - "homepage.href=https://radarr.skyelowry.com"
       - "homepage.description=Media Library - Movies"
+      # --- Homepage Widget ---
+      - "homepage.widget.type=radarr"
+      - "homepage.widget.url=http://radarr:7878"
+      - "homepage.widget.key=${RADARR_API_KEY}"
+      - "homepage.widget.enableQueue=true"
 
   prowlarr:
     image: linuxserver/prowlarr:latest
@@ -133,6 +147,10 @@ services:
       - "homepage.icon=prowlarr.png"
       - "homepage.href=https://prowlarr.skyelowry.com"
       - "homepage.description=Media Library - Torrent Index"
+      # --- Homepage Widget ---
+      - "homepage.widget.type=prowlarr"
+      - "homepage.widget.url=http://prowlarr:9696"
+      - "homepage.widget.key=${PROWLARR_API_KEY}"
 
 
   nginx:
@@ -239,6 +257,11 @@ services:
       - "homepage.icon=tautulli.png"
       - "homepage.href=https://tautulli.skyelowry.com"
       - "homepage.description=tautulli"
+      # --- Homepage Widget ---
+      - "homepage.widget.type=tautulli"
+      - "homepage.widget.url=http://tautulli:8181"
+      - "homepage.widget.key=${TAUTULLI_API_KEY}"
+      - "homepage.widget.enableUser=true"
 
   jellyfin:
     image: jellyfin/jellyfin
