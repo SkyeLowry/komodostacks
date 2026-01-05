@@ -1,4 +1,8 @@
 http:
+  serversTransports:
+    ignore-cert:
+      insecureSkipVerify: true
+      
   routers:
     jellyfin-router:
       rule: "Host(`jellyfin.skyelowry.com`)"
