@@ -37,8 +37,6 @@ services:
       - "homepage.description=Traefik Dashboard"
       - "homepage.widget.type=traefik"
       - "homepage.widget.url=http://traefik:8080"
-      - "homepage.widget.username=${TRAEFIK_USERNAME}"
-      - "homepage.widget.password=${TRAEFIK_PASSWORD}"
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     ports:
