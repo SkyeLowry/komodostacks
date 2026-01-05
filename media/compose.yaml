@@ -289,8 +289,8 @@ services:
       - "homepage.href=https://jellyfin.skyelowry.com"
       - "homepage.description=Media Server"
       - "homepage.widget.type=jellyfin"
-      - "homepage.widget.url=${WATCHED_JELLYFIN_BASEURL}"
-      - "homepage.widget.key=${WATCHED_JELLYFIN_TOKEN}"
+      - "homepage.widget.url=${JELLYFIN_BASEURL}"
+      - "homepage.widget.key=${JELLYFIN_TOKEN}"
       - "homepage.widget.enableBlocks=true"
       - "homepage.widget.enableNowPlaying=true"
 
@@ -303,9 +303,9 @@ services:
       TZ: ${TZ}
       DRYRUN: False
       PLEX_BASEURL: ${PLEX_ADVERTISE_IP}
-      PLEX_TOKEN: ${WATCHED_PLEX_TOKEN}
-      JELLYFIN_BASEURL: ${WATCHED_JELLYFIN_BASEURL}
-      JELLYFIN_TOKEN: ${WATCHED_JELLYFIN_TOKEN}
+      PLEX_TOKEN: ${PLEX_TOKEN}
+      JELLYFIN_BASEURL: ${JELLYFIN_BASEURL}
+      JELLYFIN_TOKEN: ${JELLYFIN_TOKEN}
       USER_MAPPING: ${WATCHED_USER_MAPPING}
       LIBRARY_MAPPING: ${WATCHED_LIBRARY_MAPPING}
       SYNC_FROM_PLEX_TO_JELLYFIN: ${WATCHED_SYNC_FROM_PLEX_TO_JELLYFIN}
