@@ -10,11 +10,14 @@
     - Proxmox:
         href: https://proxmox.skyelowry.home:8006
         description: Proxmox Server
+        icon: proxmox.png
 
     - TrueNAS:
         href: https://truenas.skyelowry.home
         description: TrueNAS
+        icon: truenas.png
 
     - Cloudflare:
         href: https://one.dash.cloudflare.com
         description: Cloudflare ZeroTrust
+        icon: cloudflare.png
