@@ -45,8 +45,8 @@ services:
       - SPLUNK_HEC_TOKEN=${HEC_TOKEN}
       - SPLUNK_HEC_ENABLED=true
       - SPLUNK_HEC_SSL=false  # Set to true for HTTPS
-    #ports:
-      #- "8002:8000"   # Web UI
+    ports:
+      - "8000:8000"   # Web UI
 #      - "8082:8088"   # HEC endpoint
 #      - "8089:8089"   # Management port
     volumes:
