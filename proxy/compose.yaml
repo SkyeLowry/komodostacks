@@ -59,6 +59,18 @@ services:
       - frontend-net
     depends_on:
       - traefik
+    label:
+        # --- Homepage Discovery ---
+      - "homepage.group=Infra"
+      - "homepage.name=Cloudflare Tunnels"
+      - "homepage.icon=cloudflare.png"
+      - "homepage.href=https://one.dash.cloudflare.com"
+      - "homepage.description=Cloudflare ZeroTrust Dashboard"
+      # --- Cloudflared Widget Configuration ---
+      - "homepage.widget.type=cloudflared"
+      - "homepage.widget.accountid=${CF_ACCOUNT_ID}"
+      - "homepage.widget.tunnelid=${CF_TUNNEL_ID}"
+      - "homepage.widget.key=${CF_API_TOKEN}"
 
   # --- Homepage: The Dashboard ---
   homepage:
