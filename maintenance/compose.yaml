@@ -17,14 +17,14 @@ services:
       - ${MEDIA_LOCATION}:/Media:ro
       - ${MEDIA_LOCATION}/Restore:/Restore
       - ${STORAGE_LOCATION}:/backup/appdata:ro
-      #- /mnt/homeassistant/config:/backup/hass/config:ro
-      #- /mnt/homeassistant/config:/backup/hass/config:ro
-      #- /mnt/homeassistant/media:/backup/hass/media:ro
-      #- /mnt/homeassistant/share:/backup/hass/share:ro
-      #- /mnt/homeassistant/addon_configs:/backup/hass/addon_configs:ro
-      #- /mnt/homeassistant/addons:/backup/hass/addons:ro
-      #- /mnt/homeassistant/backup:/backup/hass/backup:ro
-      #- /mnt/homeassistant/ssl:/backup/hass/ssl:ro
+      # Docker-managed CIFS volumes
+      - hass_config:/backup/hass/config:ro
+      - hass_media:/backup/hass/media:ro
+      - hass_share:/backup/hass/share:ro
+      - hass_addon_configs:/backup/hass/addon_configs:ro
+      - hass_addons:/backup/hass/addons:ro
+      - hass_backup:/backup/hass/backup:ro
+      - hass_ssl:/backup/hass/ssl:ro
     restart: unless-stopped
     networks:
       - frontend-net
@@ -122,6 +122,44 @@ services:
       - "homepage.icon=scanopy.png"
       - "homepage.href=https://scanopy.skyelowry.com"
       - "homepage.description=scanopy"
+
+volumes:
+  hass_config:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/config"
+  hass_media:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/media"
+  hass_share:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/share"
+  hass_addon_configs:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/addon_configs"
+  hass_addons:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/addons"
+  hass_backup:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/backup"
+  hass_ssl:
+    driver_opts:
+      type: cifs
+      o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST},nolock,soft,ro"
+      device: "//${HASS_HOST}/ssl"
+
 
 networks:
   scanopy:
