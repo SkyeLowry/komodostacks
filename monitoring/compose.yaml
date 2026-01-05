@@ -1,5 +1,37 @@
 services:
 
+
+glances:
+    container_name: glances
+    image: nicolargo/glances:latest
+    environment:
+      - GLANCES_OPT=-w
+      - TZ=${TZ}
+    ports:
+      - "61208:61208"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - frontend-net
+    restart: unless-stopped
+    labels:
+      # --- Traefik Routing ---
+      - "traefik.enable=true"
+      - "traefik.http.routers.glances.rule=Host(`glances.skyelowry.com`)"
+      - "traefik.http.routers.glances.entrypoints=websecure"
+      - "traefik.http.routers.glances.tls=true"
+      - "traefik.http.routers.glances.tls.certresolver=cloudflare"
+      - "traefik.http.services.glances.loadbalancer.server.port=61208"
+      # --- Homepage Discovery ---
+      - "homepage.group=Monitoring"
+      - "homepage.name=Glances"
+      - "homepage.icon=glances.png"
+      - "homepage.href=https://glances.skyelowry.com"
+      - "homepage.description=System Monitor"
+      - "homepage.widget.type=glances"
+      - "homepage.widget.url=http://glances:61208"
+      - "homepage.widget.version=3"
+
   splunk:
     image: splunk/splunk:latest
     container_name: splunk
