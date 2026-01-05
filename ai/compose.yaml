@@ -9,7 +9,6 @@ services:
     volumes:
       - ${STORAGE_LOCATION}/open-webui-data:/app/backend/data
     networks:
-      - app-ai-net
       - frontend-net
     labels:
       # --- Traefik Routing ---
@@ -26,6 +25,7 @@ services:
       - "homepage.href=https://ai.skyelowry.com"
       - "homepage.description=Local LLM Interface"
 
+
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
@@ -33,11 +33,8 @@ services:
     volumes:
       - ${STORAGE_LOCATION}/ollama:/root/.ollama
     networks:
-      - app-ai-net
       - frontend-net
 
 networks:
-  app-ai-net:
-    name: "app-ai-net"
   frontend-net:
     external: true
