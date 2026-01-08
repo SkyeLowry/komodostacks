@@ -157,6 +157,10 @@ services:
       - "homepage.icon=authentik.png"
       - "homepage.href=https://auth.skyelowry.com/"
       - "homepage.description=SSO / Identity Provider"
+      # --- Homepage Widget Configuration ---
+      - "homepage.widget.type=authentik"
+      - "homepage.widget.url=https://auth.skyelowry.com"
+      - "homepage.widget.key=${AUTHENTIK_HOMEPAGE_TOKEN}"
 
   authentik-worker:
     image: ghcr.io/goauthentik/server:latest
