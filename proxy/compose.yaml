@@ -181,6 +181,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${STORAGE_LOCATION}/authentik/media:/media
+      - ${STORAGE_LOCATION}/authentik/certs:/certs
       - ${STORAGE_LOCATION}/authentik/custom-templates:/templates
     networks:
       - frontend-net
