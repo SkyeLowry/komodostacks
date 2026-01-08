@@ -124,7 +124,7 @@ services:
       - frontend-net
 
   authentik-server:
-    image: ghcr.io/goauthentik/server:latest
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}
     container_name: authentik-server
     restart: unless-stopped
     command: server
@@ -163,7 +163,7 @@ services:
       - "homepage.widget.key=${AUTHENTIK_HOMEPAGE_TOKEN}"
 
   authentik-worker:
-    image: ghcr.io/goauthentik/server:latest
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
