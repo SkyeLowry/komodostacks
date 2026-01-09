@@ -12,6 +12,11 @@
         href: https://proxmox.skyelowry.home:8006
         description: Proxmox Server
         icon: proxmox.png
+        widget:
+          type: proxmox
+          url: https://proxmox.skyelowry.home:8006
+          username: "{{HOMEPAGE_VAR_PROXMOX_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
 
     - TrueNAS:
         href: https://truenas.skyelowry.home
