@@ -30,7 +30,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.plex.rule=Host(`plex.skyelowry.com`)"
+      - "traefik.http.routers.plex.rule=Host(`plex.${HOSTDOMAIN}`)"
       - "traefik.http.routers.plex.entrypoints=websecure" # Use 443
       - "traefik.http.routers.plex.tls=true"
       - "traefik.http.routers.plex.tls.certresolver=cloudflare" 
@@ -39,7 +39,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Plex"
       - "homepage.icon=plex.png"
-      - "homepage.href=https://plex.skyelowry.com"
+      - "homepage.href=https://plex.${HOSTDOMAIN}"
       - "homepage.description=Plex Media Library"
       # --- Homepage Widget ---
       - "homepage.widget.type=plex"
@@ -67,7 +67,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.skyelowry.com`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.${HOSTDOMAIN}`)"
       - "traefik.http.routers.sonarr.entrypoints=websecure" # Use 443
       - "traefik.http.routers.sonarr.tls=true"
       - "traefik.http.routers.sonarr.tls.certresolver=cloudflare" 
@@ -76,7 +76,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Sonarr"
       - "homepage.icon=sonarr.png"
-      - "homepage.href=https://sonarr.skyelowry.com"
+      - "homepage.href=https://sonarr.${HOSTDOMAIN}"
       - "homepage.description=Media Library - TV Shows"
       # --- Homepage Widget ---
       - "homepage.widget.type=sonarr"
@@ -105,7 +105,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.skyelowry.com`)"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.${HOSTDOMAIN}`)"
       - "traefik.http.routers.radarr.entrypoints=websecure" # Use 443
       - "traefik.http.routers.radarr.tls=true"
       - "traefik.http.routers.radarr.tls.certresolver=cloudflare" 
@@ -114,7 +114,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Radarr"
       - "homepage.icon=radarr.png"
-      - "homepage.href=https://radarr.skyelowry.com"
+      - "homepage.href=https://radarr.${HOSTDOMAIN}"
       - "homepage.description=Media Library - Movies"
       # --- Homepage Widget ---
       - "homepage.widget.type=radarr"
@@ -140,7 +140,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.skyelowry.com`)"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.${HOSTDOMAIN}`)"
       - "traefik.http.routers.prowlarr.entrypoints=websecure" # Use 443
       - "traefik.http.routers.prowlarr.tls=true"
       - "traefik.http.routers.prowlarr.tls.certresolver=cloudflare" 
@@ -149,7 +149,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Prowlarr"
       - "homepage.icon=prowlarr.png"
-      - "homepage.href=https://prowlarr.skyelowry.com"
+      - "homepage.href=https://prowlarr.${HOSTDOMAIN}"
       - "homepage.description=Media Library - Torrent Index"
       # --- Homepage Widget ---
       - "homepage.widget.type=prowlarr"
@@ -196,7 +196,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Qbittorrent"
       - "homepage.icon=qbittorrent.png"
-      - "homepage.href=https://qbittorrent.skyelowry.com"
+      - "homepage.href=https://qbittorrent.${HOSTDOMAIN}"
       - "homepage.description=Torrent Downloading"
       - "homepage.widget.type=qbittorrent"
       - "homepage.widget.url=http://traefik.skyelowry.home:8082"
@@ -219,7 +219,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.overseerr.rule=Host(`overseerr.skyelowry.com`)"
+      - "traefik.http.routers.overseerr.rule=Host(`overseerr.${HOSTDOMAIN}`)"
       - "traefik.http.routers.overseerr.entrypoints=websecure" # Use 443
       - "traefik.http.routers.overseerr.tls=true"
       - "traefik.http.routers.overseerr.tls.certresolver=cloudflare" 
@@ -228,7 +228,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Overseerr"
       - "homepage.icon=overseerr.png"
-      - "homepage.href=https://overseerr.skyelowry.com"
+      - "homepage.href=https://overseerr.${HOSTDOMAIN}"
       - "homepage.description=Media Requests"
       - "homepage.widget.type=overseerr"
       - "homepage.widget.url=http://overseerr:5055"
@@ -253,7 +253,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.tautulli.rule=Host(`tautulli.skyelowry.com`)"
+      - "traefik.http.routers.tautulli.rule=Host(`tautulli.${HOSTDOMAIN}`)"
       - "traefik.http.routers.tautulli.entrypoints=websecure" # Use 443
       - "traefik.http.routers.tautulli.tls=true"
       - "traefik.http.routers.tautulli.tls.certresolver=cloudflare" 
@@ -262,7 +262,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Tautulli"
       - "homepage.icon=tautulli.png"
-      - "homepage.href=https://tautulli.skyelowry.com"
+      - "homepage.href=https://tautulli.${HOSTDOMAIN}"
       - "homepage.description=tautulli"
       # --- Homepage Widget ---
       - "homepage.widget.type=tautulli"
@@ -294,7 +294,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Jellyfin"
       - "homepage.icon=jellyfin.png"
-      - "homepage.href=https://jellyfin.skyelowry.com"
+      - "homepage.href=https://jellyfin.${HOSTDOMAIN}"
       - "homepage.description=Media Server"
       - "homepage.widget.type=jellyfin"
       - "homepage.widget.url=${JELLYFIN_BASEURL}"
