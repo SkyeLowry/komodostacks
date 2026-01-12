@@ -19,7 +19,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.neo4j.rule=Host(`neo4j.skyelowry.com`)"
+      - "traefik.http.routers.neo4j.rule=Host(`neo4j.${HOSTDOMAIN}`)"
       - "traefik.http.routers.neo4j.entrypoints=websecure" # Use 443
       - "traefik.http.routers.neo4j.tls=true"
       - "traefik.http.routers.neo4j.tls.certresolver=cloudflare" 
@@ -28,7 +28,7 @@ services:
       - "homepage.group=App"
       - "homepage.name=Neo4j"
       - "homepage.icon=neo4j.png"
-      - "homepage.href=https://neo4j.skyelowry.com"
+      - "homepage.href=https://neo4j.${HOSTDOMAIN}"
       - "homepage.description=Neo4j Graph DB"
 
 
@@ -46,7 +46,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.influxdb.rule=Host(`influxdb.skyelowry.com`)"
+      - "traefik.http.routers.influxdb.rule=Host(`influxdb.${HOSTDOMAIN}`)"
       - "traefik.http.routers.influxdb.entrypoints=websecure" # Use 443
       - "traefik.http.routers.influxdb.tls=true"
       - "traefik.http.routers.influxdb.tls.certresolver=cloudflare" 
@@ -55,7 +55,7 @@ services:
       - "homepage.group=App"
       - "homepage.name=Influx DB"
       - "homepage.icon=influxdb.png"
-      - "homepage.href=https://influxdb.skyelowry.com"
+      - "homepage.href=https://influxdb.${HOSTDOMAIN}"
       - "homepage.description=influxdb2"
 
 networks:
