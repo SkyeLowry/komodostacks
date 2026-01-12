@@ -283,6 +283,7 @@ services:
       - /dev/dri/card0:/dev/dri/card0
     volumes:
       - ${STORAGE_LOCATION}/jellyfin-config:/config
+      - ${STORAGE_LOCATION}/logs/jellyfin:/config/log
       - ${STORAGE_LOCATION}/jellyfin-cache:/cache
       - ${MEDIA_LOCATION}/Plex:/media
     restart: 'unless-stopped'
