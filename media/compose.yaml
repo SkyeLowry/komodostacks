@@ -56,6 +56,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/sonarr-config:/config
+      - ${STORAGE_LOCATION}/logs/sonarr:/config/logs
       - ${MEDIA_LOCATION}/deluge-downloads:/downloads
       - ${MEDIA_LOCATION}/Plex:/Plex
     networks:
@@ -93,6 +94,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/radarr-config:/config
+      - ${STORAGE_LOCATION}/logs/radarr:/config/logs
       - ${MEDIA_LOCATION}/deluge-downloads:/downloads
       - ${MEDIA_LOCATION}/Plex:/Plex
     #ports:
@@ -183,6 +185,7 @@ services:
       - QBT_WEBUI_PORT=8082
     volumes:
       - ${STORAGE_LOCATION}/qbittorrent-config:/config
+      - ${STORAGE_LOCATION}/logs/radarr:/config/qBittorrent/logs
       - ${MEDIA_LOCATION}/deluge-downloads:/downloads
     tmpfs:
       - /tmp
