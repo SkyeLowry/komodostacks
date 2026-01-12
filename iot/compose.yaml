@@ -35,7 +35,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.hyperion.rule=Host(`hyperion.skyelowry.com`)"
+      - "traefik.http.routers.hyperion.rule=Host(`hyperion.${HOSTDOMAIN}`)"
       - "traefik.http.routers.hyperion.entrypoints=websecure" # Use 443
       - "traefik.http.routers.hyperion.tls=true"
       - "traefik.http.routers.hyperion.tls.certresolver=cloudflare" 
@@ -44,7 +44,7 @@ services:
       - "homepage.group=Apps"
       - "homepage.name=Hyperion"
       - "homepage.icon=hyperion.png"
-      - "homepage.href=https://hyperion.skyelowry.com"
+      - "homepage.href=https://hyperion.${HOSTDOMAIN}"
       - "homepage.description=TV Lighting"
 
 
@@ -81,7 +81,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.frigate.rule=Host(`frigate.skyelowry.com`)"
+      - "traefik.http.routers.frigate.rule=Host(`frigate.${HOSTDOMAIN}`)"
       - "traefik.http.routers.frigate.entrypoints=websecure" # Use 443
       - "traefik.http.routers.frigate.tls=true"
       - "traefik.http.routers.frigate.tls.certresolver=cloudflare" 
@@ -92,7 +92,7 @@ services:
       - "homepage.group=Home"
       - "homepage.name=Frigate"
       - "homepage.icon=frigate.png"
-      - "homepage.href=https://frigate.skyelowry.com"
+      - "homepage.href=https://frigate.${HOSTDOMAIN}"
       - "homepage.description=Security Cameras"
       - "homepage.widget.type=frigate"
       - "homepage.widget.url=http://frigate:5000"
