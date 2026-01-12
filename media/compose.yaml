@@ -9,6 +9,7 @@ services:
       - ADVERTISE_IP=${PLEX_ADVERTISE_IP}
     volumes:
       - ${STORAGE_LOCATION}/plex-config:/config
+      - ${STORAGE_LOCATION}/logs/plex:/config/Library/Application Support/Plex Media Server/Logs
       - ${MEDIA_LOCATION}/Plex:/Plex
       - ${STORAGE_LOCATION}/plex-transcode:/transcode
     ports:
@@ -128,6 +129,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/prowlarr-config:/config
+      - ${STORAGE_LOCATION}/logs/prowlarr:/config/logs
     #ports:
       #- 9696:9696
     networks:
