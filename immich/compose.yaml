@@ -40,7 +40,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.immich.rule=Host(`immich.skyelowry.com`)"
+      - "traefik.http.routers.immich.rule=Host(`immich.${HOSTDOMAIN}`)"
       - "traefik.http.routers.immich.entrypoints=websecure" # Use 443
       - "traefik.http.routers.immich.tls=true"
       - "traefik.http.routers.immich.tls.certresolver=cloudflare" 
@@ -49,7 +49,7 @@ services:
       - "homepage.group=App"
       - "homepage.name=Immich"
       - "homepage.icon=immich.png"
-      - "homepage.href=https://immich.skyelowry.com"
+      - "homepage.href=https://immich.${HOSTDOMAIN}"
       - "homepage.description=Photo Management"
       - "homepage.widget.type=immich"
       - "homepage.widget.url=http://immich_server:2283"
