@@ -17,7 +17,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.glances.rule=Host(`glances.skyelowry.com`)"
+      - "traefik.http.routers.glances.rule=Host(`glances.${HOSTDOMAIN}`)"
       - "traefik.http.routers.glances.entrypoints=websecure"
       - "traefik.http.routers.glances.tls=true"
       - "traefik.http.routers.glances.tls.certresolver=cloudflare"
@@ -26,7 +26,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Glances"
       - "homepage.icon=glances.png"
-      - "homepage.href=https://glances.skyelowry.com"
+      - "homepage.href=https://glances.${HOSTDOMAIN}"
       - "homepage.description=System Monitor"
       # Widget disabled (avoids Homepage widget rendering errors)
 
@@ -49,7 +49,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.cribl.rule=Host(`cribl.skyelowry.com`)"
+      - "traefik.http.routers.cribl.rule=Host(`cribl.${HOSTDOMAIN}`)"
       - "traefik.http.routers.cribl.entrypoints=websecure" # Use 443
       - "traefik.http.routers.cribl.tls=true"
       - "traefik.http.routers.cribl.tls.certresolver=cloudflare" 
@@ -58,7 +58,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Cribl"
       - "homepage.icon=cribl.png"
-      - "homepage.href=https://cribl.skyelowry.com"
+      - "homepage.href=https://cribl.${HOSTDOMAIN}"
       - "homepage.description=Cribl Logging"
       
   workers:
