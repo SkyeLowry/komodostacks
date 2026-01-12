@@ -212,6 +212,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/overseerr-config:/app/config
+      - ${STORAGE_LOCATION}/logs/overseerr:/config/logs
     networks:
       - frontend-net
     restart: 'unless-stopped'
@@ -243,6 +244,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/tautulli-config:/config
+      - ${STORAGE_LOCATION}/logs/tautulli:/config/logs
     #ports:
       #- 8181:8181
     networks:
