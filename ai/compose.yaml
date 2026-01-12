@@ -13,7 +13,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.openwebui.rule=Host(`ai.skyelowry.com`)"
+      - "traefik.http.routers.openwebui.rule=Host(`ai.${HOSTDOMAIN}`)"
       - "traefik.http.routers.openwebui.entrypoints=websecure" # Use 443
       - "traefik.http.routers.openwebui.tls=true"
       - "traefik.http.routers.openwebui.tls.certresolver=cloudflare" 
@@ -22,7 +22,7 @@ services:
       - "homepage.group=AI"
       - "homepage.name=Open WebUI"
       - "homepage.icon=open-webui.png"
-      - "homepage.href=https://ai.skyelowry.com"
+      - "homepage.href=https://ai.${HOSTDOMAIN}"
       - "homepage.description=Local LLM Interface"
 
 
@@ -37,7 +37,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.ollama.rule=Host(`ollama.skyelowry.com`)"
+      - "traefik.http.routers.ollama.rule=Host(`ollama.${HOSTDOMAIN}`)"
       - "traefik.http.routers.ollama.entrypoints=websecure" # Use 443
       - "traefik.http.routers.ollama.tls=true"
       - "traefik.http.routers.ollama.tls.certresolver=cloudflare" 
