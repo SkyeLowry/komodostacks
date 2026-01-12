@@ -31,7 +31,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.duplicacy.rule=Host(`duplicacy.skyelowry.com`)"
+      - "traefik.http.routers.duplicacy.rule=Host(`duplicacy.${HOSTDOMAIN}`)"
       - "traefik.http.routers.duplicacy.entrypoints=websecure" # Use 443
       - "traefik.http.routers.duplicacy.tls=true"
       - "traefik.http.routers.duplicacy.tls.certresolver=cloudflare" 
@@ -40,7 +40,7 @@ services:
       - "homepage.group=Infra"
       - "homepage.name=Duplicacy"
       - "homepage.icon=duplicacy.png"
-      - "homepage.href=https://duplicacy.skyelowry.com"
+      - "homepage.href=https://duplicacy.${HOSTDOMAIN}"
       - "homepage.description=Backup Systems"
 
 
