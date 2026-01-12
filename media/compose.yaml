@@ -185,7 +185,7 @@ services:
       - QBT_WEBUI_PORT=8082
     volumes:
       - ${STORAGE_LOCATION}/qbittorrent-config:/config
-      - ${STORAGE_LOCATION}/logs/radarr:/config/qBittorrent/logs
+      - ${STORAGE_LOCATION}/logs/radarr:/config/qBittorrent/data/logs
       - ${MEDIA_LOCATION}/deluge-downloads:/downloads
     tmpfs:
       - /tmp
