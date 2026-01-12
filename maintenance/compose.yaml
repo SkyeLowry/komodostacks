@@ -82,14 +82,5 @@ volumes:
       o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST}"
       device: "//${HASS_HOST}/ssl"
 
-networks:
-  scanopy:
-    name: scanopy
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.31.0.0/16
-          gateway: 172.31.0.1
-
   frontend-net:
     external: true
