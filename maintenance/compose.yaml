@@ -1,14 +1,12 @@
 
 services:
-  duplicacy-web:
+  duplicacy:
     container_name: duplicacy
     hostname: duplicacy
     image: saspus/duplicacy-web:latest
     ports:
       - "3875:3875"
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=${TZ}
     volumes:
       - ${STORAGE_LOCATION}/duplicacy-config:/config
