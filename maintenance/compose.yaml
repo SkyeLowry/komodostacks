@@ -79,6 +79,7 @@ volumes:
       type: cifs
       o: "username=${HASS_USER},password=${HASS_PASS},addr=${HASS_HOST}"
       device: "//${HASS_HOST}/ssl"
-
+      
+networks:
   frontend-net:
     external: true
