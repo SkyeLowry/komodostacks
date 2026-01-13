@@ -25,7 +25,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.teslamate.rule=Host(`teslamate.skyelowry.com`)"
+      - "traefik.http.routers.teslamate.rule=Host(`teslamate.${HOSTDOMAIN}`)"
       - "traefik.http.routers.teslamate.entrypoints=websecure" # Use 443
       - "traefik.http.routers.teslamate.tls=true"
       - "traefik.http.routers.teslamate.tls.certresolver=cloudflare" 
@@ -34,7 +34,7 @@ services:
       - "homepage.group=App"
       - "homepage.name=Teslamate"
       - "homepage.icon=teslamate.png"
-      - "homepage.href=https://teslamate.skyelowry.com"
+      - "homepage.href=https://teslamate.${HOSTDOMAIN}"
       - "homepage.description=Vehicle Logging"
 
   database:
@@ -69,7 +69,7 @@ services:
     labels:
       # --- Traefik Routing ---
       - "traefik.enable=true"
-      - "traefik.http.routers.teslamategraph.rule=Host(`teslamategraph.skyelowry.com`)"
+      - "traefik.http.routers.teslamategraph.rule=Host(`teslamategraph.${HOSTDOMAIN}`)"
       - "traefik.http.routers.teslamategraph.entrypoints=websecure" # Use 443
       - "traefik.http.routers.teslamategraph.tls=true"
       - "traefik.http.routers.teslamategraph.tls.certresolver=cloudflare" 
