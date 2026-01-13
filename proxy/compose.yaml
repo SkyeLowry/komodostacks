@@ -17,7 +17,7 @@ services:
       - "--providers.file.filename=/dynamic/dynamic.yaml"
       # --- SSL CONFIGURATION ---
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.cloudflare.acme.email=patrickskyelowry@gmail.com"
+      - "--certificatesresolvers.cloudflare.acme.email=${TRAEFIK_CLOUDFLARE_EMAIL}"
       - "--certificatesresolvers.cloudflare.acme.storage=/cert/acme.json"
       # --- LOGGING
       #- "--log.level=DEBUG"             # Provides detailed SSL/ACME info
@@ -26,17 +26,17 @@ services:
     labels:
       - "traefik.enable=true"
       # This router handles both the API and the Dashboard UI
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.skyelowry.home`)"
+      - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=web" # Or websecure if you have SSL
                   # --- Homepage Discovery ---
       - "homepage.group=Infra"
       - "homepage.name=Traefik"
       - "homepage.icon=traefik.png"
-      - "homepage.href=http://traefik.skyelowry.home/dashboard/"
+      - "homepage.href=http://${TRAEFIK_HOST}/dashboard/"
       - "homepage.description=Traefik Dashboard"
       - "homepage.widget.type=traefik"
-      - "homepage.widget.url=http://traefik.skyelowry.home"
+      - "homepage.widget.url=http://${TRAEFIK_HOST}"
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     ports:
@@ -90,10 +90,10 @@ services:
     #ports:
     #  - 3000:3000
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: "dash.skyelowry.com,dash.skyelowry.com:3000,192.168.2.5:3000"
+      HOMEPAGE_ALLOWED_HOSTS: "dash.${HOSTDOMAIN},dash.${HOSTDOMAIN}:3000,192.168.2.5:3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homepage.rule=Host(`dash.skyelowry.com`)"
+      - "traefik.http.routers.homepage.rule=Host(`dash.${HOSTDOMAIN}`)"
       - "traefik.http.routers.homepage.entrypoints=websecure" # Use 443
       - "traefik.http.routers.homepage.tls=true"
       - "traefik.http.routers.homepage.tls.certresolver=cloudflare" 
@@ -133,7 +133,7 @@ services:
       - authentik-redis
     environment:
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
-      AUTHENTIK_EXTERNAL_URL: https://auth.skyelowry.com
+      AUTHENTIK_EXTERNAL_URL: https://auth.${HOSTDOMAIN}
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
@@ -146,7 +146,7 @@ services:
       - frontend-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.authentik.rule=Host(`auth.skyelowry.com`)"
+      - "traefik.http.routers.authentik.rule=Host(`auth.${HOSTDOMAIN}`)"
       - "traefik.http.routers.authentik.entrypoints=websecure"
       - "traefik.http.routers.authentik.tls=true"
       - "traefik.http.routers.authentik.tls.certresolver=cloudflare"
@@ -155,11 +155,11 @@ services:
       - "homepage.group=Infra"
       - "homepage.name=Authentik"
       - "homepage.icon=authentik.png"
-      - "homepage.href=https://auth.skyelowry.com/"
+      - "homepage.href=https://auth.${HOSTDOMAIN}"
       - "homepage.description=SSO / Identity Provider"
       # --- Homepage Widget Configuration ---
       - "homepage.widget.type=authentik"
-      - "homepage.widget.url=https://auth.skyelowry.com"
+      - "homepage.widget.url=https://auth.${HOSTDOMAIN}"
       - "homepage.widget.key=${AUTHENTIK_HOMEPAGE_TOKEN}"
 
   authentik-worker:
@@ -172,7 +172,7 @@ services:
       - authentik-redis
     environment:
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
-      AUTHENTIK_EXTERNAL_URL: https://auth.skyelowry.com
+      AUTHENTIK_EXTERNAL_URL: https://auth.${HOSTDOMAIN}
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
